@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2018 sp1 (x64) (http://www.altova.com) by Pashenina Veronika (Perspective Technologies Development Center, LLC) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+	<xs:include schemaLocation="base_ref.xsd"/>
+	<xs:include schemaLocation="base_types.xsd"/>
+	<xs:complexType name="skzkm_report_of_dropout">
+		<xs:annotation>
+			<xs:documentation>Регистрация в ИС МДЛП сведений об отбраковке (информация от СУЗ)</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="subject_id" type="system_subject_type">
+				<xs:annotation>
+					<xs:documentation>Идентификатор организации-отправителя</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="operation_date" type="datetimeoffset">
+				<xs:annotation>
+					<xs:documentation>Дата совершения операции</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="oms_id" type="guid_type">
+				<xs:annotation>
+					<xs:documentation>Идентификатор СУЗ</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="oms_order_id" type="guid_type">
+				<xs:annotation>
+					<xs:documentation>Идентификатор заказа СУЗ</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="dropout_reason" type="dropout_reason_type_enum">
+				<xs:annotation>
+					<xs:documentation>Причина списания</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="order_details">
+				<xs:annotation>
+					<xs:documentation>Список продукции</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="sgtin" type="sign_sgtin_type" maxOccurs="25000">
+							<xs:annotation>
+								<xs:documentation>Номер SGTIN</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+				<xs:unique name="ismp_ux_skzkm_report_of_dropout_sgtin">
+					<xs:selector xpath="sgtin"/>
+					<xs:field xpath="."/>
+				</xs:unique>
+			</xs:element>
+			<xs:element name="device_info" type="skzkm_info_type">
+				<xs:annotation>
+					<xs:documentation>Информация об устройстве РЭ или РВ</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="action_id" type="xs:int" use="required" fixed="10305"/>
+	</xs:complexType>
+</xs:schema>

@@ -1,0 +1,95 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <RootNamespace>MdlpApiClient</RootNamespace>
+    <Description>Честный знак. ИС «Маркировка». МДЛП — MDLP REST API client.</Description>
+    <Company>Alexey Yakovlev</Company>
+    <Copyright>Copyright © Alexey Yakovlev 2020</Copyright>
+    <Version>1.4.1.0</Version>
+    <FileVersion>1.4.1.0</FileVersion>
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
+    <Authors>Alexey Yakovlev;Contributors</Authors>
+
+    <PackageId>MdlpApiClient</PackageId>
+    <PackageTags>MDLP;REST;API;Честный знак</PackageTags>
+    <PackageIconUrl>https://github.com/yallie/MdlpClient/raw/master/Docs/MdlpApiClientLogo.png</PackageIconUrl>
+    <PackageProjectUrl>https://github.com/yallie/MdlpClient</PackageProjectUrl>
+    <PackageLicenseUrl>https://github.com/yallie/MdlpClient/blob/master/LICENSE</PackageLicenseUrl>
+    <RepositoryType>git</RepositoryType>
+    <RepositoryUrl>https://github.com/yallie/MdlpClient.git</RepositoryUrl>
+    <!--PackageLicenseExpression>MIT</PackageLicenseExpression-->
+    <PackageReleaseNotes>Beta release. What's new:
+
+      v1.4.1:
+      — Added new XSD schemas, v1.35 (2020/10/23): 702, 703
+
+      v1.4.0:
+      — Support for XSD v1.35
+      — Set default XSD schema version
+      — Avoid formatting non-JSON content in trace
+      — Updated RightsEnum, added new constants
+
+      v1.3.0:
+      — Support for MDLP API v3.06.1
+      — Added GetSsccFullHierarchy method
+      — Added AuthTypeEnum, GroupTypeEnum, SgtinEmissionType, SgtinStatus, UserStatus, UserStatusReason
+      — Updated BranchFilter, DocFilter, Sgtin, SgtinExtended, UserBase, MedProduct, MedProductPublic
+      — Added support for the request rate limits
+
+      v1.2.0:
+      — Worked around DateTime serialization issues.
+
+      v1.1.0:
+      — SendDocument, GetDocument and GetTicket are working with document classes, not strings.
+      — Added GetDocumentText and GetTicketText methods to return strings.
+      — Added XmlSerializationHelper class.
+      — Automatic selection of SendDocument and SendLargeDocument based on the document size.
+      — Sandbox support.
+
+      v1.0.0:
+      — Initial implementation.
+    </PackageReleaseNotes>
+    <NeutralLanguage>en-US</NeutralLanguage>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <TargetFramework>net462</TargetFramework>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Properties\AssemblyInfo.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.txt" />
+    <Compile Include="..\MdlpApiClient.Xsd\MdlpApiClient.Xsd.cs">
+    	<Link>Xsd\MdlpApiClient.Xsd.cs</Link>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="restsharp" Version="106.11.4" />
+    <PackageReference Include="GostCryptography" Version="2.0.8" />
+    <PackageReference Include="ServiceStack.Text" Version="4.0.33" />
+  </ItemGroup>
+
+  <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard2.1' ">
+    <PackageReference Include="System.ComponentModel.Annotations" Version="4.7.0" />
+    <PackageReference Include="System.Runtime" Version="4.3.0" />
+    <PackageReference Include="System.Runtime.Serialization.Primitives" Version="4.3.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+  </ItemGroup>
+
+  <!-- always include debug info, regardless of the target Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'" -->
+  <PropertyGroup>
+    <DebugType>full</DebugType>
+    <DebugSymbols>True</DebugSymbols>
+    <NoWarn>1701;1702;1591</NoWarn>
+    <LangVersion>default</LangVersion>
+  </PropertyGroup>
+
+</Project>
