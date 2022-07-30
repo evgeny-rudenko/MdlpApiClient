@@ -63,13 +63,13 @@
             this.rtbSgtins.Location = new System.Drawing.Point(12, 176);
             this.rtbSgtins.Name = "rtbSgtins";
             this.rtbSgtins.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.ForcedVertical;
-            this.rtbSgtins.Size = new System.Drawing.Size(476, 557);
+            this.rtbSgtins.Size = new System.Drawing.Size(476, 337);
             this.rtbSgtins.TabIndex = 2;
             this.rtbSgtins.Text = "";
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(12, 739);
+            this.button2.Location = new System.Drawing.Point(17, 519);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(476, 54);
             this.button2.TabIndex = 3;
@@ -101,7 +101,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(502, 805);
+            this.ClientSize = new System.Drawing.Size(502, 592);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.button2);

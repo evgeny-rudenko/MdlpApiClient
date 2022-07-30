@@ -25,7 +25,7 @@ namespace MDLPGUIInvoice.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("8e8199c6-de71-42b5-b295-66883ad9c67d")]
+        [global::System.Configuration.DefaultSettingValueAttribute("c72fbf79-bc1d-4eff-96ec-ed4c361b442c")]
         public string ClientID {
             get {
                 return ((string)(this["ClientID"]));
@@ -34,7 +34,7 @@ namespace MDLPGUIInvoice.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("50b382cf-2bf8-4808-801c-f568953db28d")]
+        [global::System.Configuration.DefaultSettingValueAttribute("933dc32f-0336-4613-b4bf-f161e2e14b22")]
         public string ClientSecret {
             get {
                 return ((string)(this["ClientSecret"]));
@@ -47,15 +47,6 @@ namespace MDLPGUIInvoice.Properties {
         public string UserID {
             get {
                 return ((string)(this["UserID"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("fff")]
-        public string FFF {
-            get {
-                return ((string)(this["FFF"]));
             }
         }
     }

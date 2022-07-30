@@ -31,8 +31,15 @@ namespace KIZCintrol
         }
         static void Main(string[] args)
         {
-                        
-            
+            List<string> sgt = new List<string>();
+            sgt.Add("sgtin1");
+            sgt.Add("sgtin2");
+            sgt.Add("sgtin3");
+
+            MDLPDoc522 d = new MDLPDoc522(sgt, MDLPDoc522.withdrawal_type.ВыборочнКонтроль, "0000000");
+
+
+            return;
 
             farmaConnectionString = Properties.Settings.Default.ConnectionString;
             farmaConnection = new SqlConnection(farmaConnectionString);

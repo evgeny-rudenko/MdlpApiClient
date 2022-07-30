@@ -51,7 +51,7 @@ namespace MDLPGUIInvoice
             catch (Exception ex)    
             {
 
-                MessageBox.Show("Произошла ошибка при получении кодов. Проверьте SSCC");
+                MessageBox.Show("Произошла ошибка при получении кодов. Проверьте SSCC \n "+ ex.Message);
                 logger.Fatal(ex.Message);
                 return;
             }
