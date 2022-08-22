@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
+using System.Xml.Linq;
 
 namespace KIZCintrol
 {
@@ -29,57 +30,76 @@ namespace KIZCintrol
         private List<string> SGTINs = new List<string>();
         public XmlDocument XmlDoc = new XmlDocument();
 
+        private XmlDocument ToXmlDocument( XDocument xDocument)
+        {
+            var xmlDocument = new XmlDocument();
+            using (var reader = xDocument.CreateReader())
+            {
+                xmlDocument.Load(reader);
+            }
+
+            var xDeclaration = xDocument.Declaration;
+            
+            if (xDeclaration != null)
+            {
+                var xmlDeclaration = xmlDocument.CreateXmlDeclaration(
+                    xDeclaration.Version,
+                    xDeclaration.Encoding,
+                    xDeclaration.Standalone
+                 
+                 );
+                
+                
+                xmlDocument.InsertBefore(xmlDeclaration, xmlDocument.FirstChild);
+            }
+
+            
+
+            xmlDocument.InsertBefore(xmlDocument.CreateXmlDeclaration("1.0", "UTF-8", "yes"), xmlDocument.FirstChild);
+
+            return xmlDocument;
+        }
         public MDLPDoc522(List<string> sGTINs, withdrawal_type withdrawal_Type, string subject_id)
         {
             SGTINs = sGTINs ?? throw new ArgumentNullException(nameof(sGTINs));
-            XmlDeclaration xmlDeclaration = XmlDoc.CreateXmlDeclaration("1.0", "UTF-8", "yes" );
-            XmlElement root = XmlDoc.DocumentElement;
-            XmlDoc.InsertBefore(xmlDeclaration, root);
-            XmlElement document_version = XmlDoc.CreateElement("1.37", "documents version");
-            root.AppendChild ()
+            
+            List<XElement> sGTINSXMLList = new List<XElement>();
+            foreach (string s in sGTINs)
+            {
+                sGTINSXMLList.Add(new XElement("sgtin", s));
+            }
+            
+            
 
-            /*
-            //xml Decalration:
-XmlDocument xmlDoc = new XmlDocument();
-XmlDeclaration xmlDeclaration = xmlDoc.CreateXmlDeclaration("1.0", "UTF-8", null);
-XmlElement root = xmlDoc.DocumentElement;
-xmlDoc.InsertBefore(xmlDeclaration, root);
-// add body
-XmlElement body = xmlDoc.CreateElement(string.Empty, "body", string.Empty);
-xmlDoc.AppendChild(body);
-XmlElement body = xmlDoc.CreateElement(string.Empty, "body", string.Empty);
-xmlDoc.DocumentElement.AppendChild(body); //without DocumentElement ->ERR
+            XDocument doc = new XDocument(
+                new XElement ("documents",
+                    new XAttribute ("version", "1.37"),
+                    new XElement ("withdrawal",
+                    new XAttribute  ("action_id", "552"),
+                    new XElement ("subject_id", subject_id),
+                    new XElement ("operation_date", DateTime.Now.ToUniversalTime()),
+                    new XElement ("doc_date", DateTime.Now.ToShortDateString()),
+                    new XElement("withdrawal_type", "23"),
+                    new XElement("order_details",
+                        
+                        sGTINSXMLList
+
+                        )
+                    )
                 
-            XmlNode keyNode = xmlDoc.CreateElement(entry.Key); //open TAB
-                keyNode.InnerText = entry.Value;
-                body.AppendChild(keyNode); //close TAB
-
                 
-                //(2) string.Empty makes cleaner code
-        XmlElement element1 = doc.CreateElement( string.Empty, "body", string.Empty );
-        doc.AppendChild( element1 );
+                )
+                );
 
-        XmlElement element2 = doc.CreateElement( string.Empty, "level1", string.Empty );
-        element1.AppendChild( element2 );
-
-        XmlElement element3 = doc.CreateElement( string.Empty, "level2", string.Empty );
-        XmlText text1 = doc.CreateTextNode( "text" );
-        element3.AppendChild( text1 );
-        element2.AppendChild( element3 );
-
-        XmlElement element4 = doc.CreateElement( string.Empty, "level2", string.Empty );
-        XmlText text2 = doc.CreateTextNode( "other text" );
-        element4.AppendChild( text2 );
-        element2.AppendChild( element4 );
-
-        doc.Save( "D:\\document.xml" );
-             */
+            XmlDoc = ToXmlDocument(doc);
+         
         }
 
     }
 }
-
+#region Пример и результатформирования документа 522
 /*
+// Документ который формируется на сайте 
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <documents version="1.37">
   <withdrawal action_id="552">
@@ -93,4 +113,21 @@ xmlDoc.DocumentElement.AppendChild(body); //without DocumentElement ->ERR
     </order_details>
   </withdrawal>
 </documents>
- */
+ 
+/// результат работы программы 
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<documents version="1.37">
+  <withdrawal action_id="552">
+    <subject_id>0000000</subject_id>
+    <operation_date>2022-08-02T20:11:36.115597Z</operation_date>
+    <operation_date>02.08.2022</operation_date>
+    <withdrawal_type>23</withdrawal_type>
+    <order_details>
+      <sgtin>sgtin1</sgtin>
+      <sgtin>sgtin2</sgtin>
+      <sgtin>sgtin3</sgtin>
+    </order_details>
+  </withdrawal>
+</documents>
+*/
+#endregion

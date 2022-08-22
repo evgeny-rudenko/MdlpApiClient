@@ -299,7 +299,7 @@
         /// <returns>Список КИЗ, непосредственно вложенных в указанную третичную упаковку</returns>
         public SsccFullHierarchyResponse<HierarchySsccInfo> GetSsccFullHierarchy(string sscc)
         {
-            RequestRate(35); // 100, сказано 30
+            RequestRate(100); // 100, сказано 30
 
             var result = Get<SsccFullHierarchyResponse<HierarchySsccInfoInternal>>("reestr/sscc/{sscc}/full-hierarchy", new[]
             {

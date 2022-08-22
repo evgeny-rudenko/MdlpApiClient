@@ -16,6 +16,8 @@ namespace KIZCintrol
         public string pack3_id;    // АХЕЗ
         public string sys_id;      // предположительно - номер точки где числится КИЗ
         public DateTime last_tracing_op_date; // последняя дата операции с КИЗом 
+        public string cheque;
+        public string internal_barcode;
         // пример 
         // "18901148253527","B001641","Найз","18901148253527B2662MOJDA3DL","В обороте","","00000000173611","2022-02-12T00:13:23"
     }
@@ -51,7 +53,8 @@ namespace KIZCintrol
                 onekiz.pack3_id = deleteQuotes( splitkiz[5]);
                 onekiz.sys_id = deleteQuotes( splitkiz[6]);
                 onekiz.last_tracing_op_date = DateTime.Parse(deleteQuotes( splitkiz[7]));
-
+                onekiz.cheque = "";
+                onekiz.internal_barcode="";
                 kiz.Add(onekiz);
             }
             

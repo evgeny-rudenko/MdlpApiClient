@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MdlpApiClient;
+using System.IO;
 
 namespace MDLPKIZControl
 {
@@ -52,27 +53,81 @@ namespace MDLPKIZControl
                 ClientID = Properties.Settings.Default.ClientID, // из кабинета ЧЗ  - учетные системы
                 ClientSecret = Properties.Settings.Default.ClientSecret, // из кабинета ЧЗ - учетные системы
                 UserID = Properties.Settings.Default.UserID  // Отпечаток подписи пользователя - можно посмотреть в свойствах сертификата
+                
 
             });
             //MdlpClient.
-
-            MdlpApiClient.DataContracts.BranchFilter bf = new MdlpApiClient.DataContracts.BranchFilter();
+            client.Tracer = Console.WriteLine;
+            /*MdlpApiClient.DataContracts.BranchFilter bf = new MdlpApiClient.DataContracts.BranchFilter();
             MdlpApiClient.DataContracts.BranchEntry[] branches = client.GetBranches(bf, 0, 100).Entries; // у нас их всего 18 штук
-
+            
 
 
             foreach (MdlpApiClient.DataContracts.BranchEntry br in branches )
             {
-                
+                Console.WriteLine(br.OrgName);
+                Console.WriteLine(br.ID);
             }
-
+            */
 
             // получение содержимого короба по SSCC
-            //var sgtins = client.GetSsccFullHierarchy("046014989961618459");
+            var sgtins = client.GetSsccFullHierarchy("046014989961618459");
             
             var logger = new SimpleLogger();
             logger.Info("Запуск приложения");
 
+            
+
+            string pathName = "";
+            string executablePath = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+            string docPath = Path.Combine(executablePath, "522");
+            List<string> processedDocuments = new List<string>(); 
+            if (File.Exists("processed.txt"))
+            {
+                processedDocuments = File.ReadLines("processed.txt").ToList();
+            }
+
+
+            DirectoryInfo d = new DirectoryInfo(docPath); 
+
+            FileInfo[] Files = d.GetFiles("*.xml"); //получаем список файлов для списания
+            string str = "";
+
+            Console.WriteLine("Начинаем обрабатывать откументы");
+            logger.Info("Начинаем обрабатывать документы");
+            foreach (FileInfo file in Files)
+            {
+
+                logger.Info($"Обработка файла {file.Name}"); 
+                Console.WriteLine(file.Name);
+                string document = File.ReadAllText(file.FullName);
+                if (processedDocuments.Contains(file.Name))
+                {
+                    Console.WriteLine($"Файл {file.Name} уже обработан ранее");
+                    continue;
+                }    
+
+                try 
+                {
+                    Console.WriteLine(  $"Отправка документа {file.FullName}");
+                    client.SendDocument(document);  
+                }
+                catch (Exception ex)
+                {
+                    logger.Error($"Ошибка при обработке файла {file.Name}");
+                    logger.Error(ex.Message);
+                    Console.WriteLine(ex.Message);
+                    Environment.Exit(1);
+                    
+                }
+                finally
+                {
+                    logger.Info($"Отправлен документ {file.Name}");
+                    processedDocuments.Add(file.Name);
+                    File.WriteAllLines("processed.txt", processedDocuments);
+
+                }
+            }
 
         }
         

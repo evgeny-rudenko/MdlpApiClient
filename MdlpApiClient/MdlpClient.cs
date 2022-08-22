@@ -51,13 +51,17 @@
             Serializer = new ServiceStackSerializer();
             BaseUrl = client.BaseUrl.ToString();
             Limiter = new RequestRateLimiter();
-
+            
             // set up REST client
             Client = client;
             Client.Authenticator = new CredentialsAuthenticator(this, credentials);
             Client.Encoding = Encoding.UTF8;
             Client.ThrowOnDeserializationError = false;
             Client.UseSerializer(() => Serializer);
+
+            // ошибка о неверном сертификате сервера //2022.08.21
+            // работало, потом все поломалось
+            Client.RemoteCertificateValidationCallback = (sender, certificate, chain, sslPolicyErrors) => true; 
         }
 
         /// <summary>

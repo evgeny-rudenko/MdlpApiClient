@@ -216,13 +216,13 @@
         /// <returns>Код аутентификации для получения ключа сессии</returns>
         internal string Authenticate(string clientId, string clientSecret, string userId, string authType)
         {
-            RequestRate(1); // 23
+            RequestRate(23); // 23 исправил с 1 //2022
 
             var auth = Post<AuthResponse>("auth", new
             {
                 client_id = clientId,
                 client_secret = clientSecret,
-                user_id = userId,
+                user_id = userId.ToUpper() ,
                 auth_type = authType,
             });
 
