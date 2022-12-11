@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.2.32526.322
+VisualStudioVersion = 17.3.32901.215
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{F1E44E55-75F6-49BA-A2EE-2FE735091191}"
 	ProjectSection(SolutionItems) = preProject
@@ -23,6 +23,14 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KIZControl", "KIZCintrol\KIZControl.csproj", "{BB501ABF-173E-48C9-8F96-049882B5D951}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MDLPGUIInvoice", "MDLPGUIInvoice\MDLPGUIInvoice.csproj", "{D281AE00-945E-46A5-B964-A0717D9B6A55}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MDLPReports", "MDLPReports\MDLPReports.csproj", "{3575B7F5-53B8-4932-999F-BACF9B97B545}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Doc552ByGTIN", "Doc552ByGTIN\Doc552ByGTIN.csproj", "{A00FFAC8-60ED-45BA-BB16-D6A31C5ECC27}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MDLPDocumentsLib", "MDLPDocumentsLib\MDLPDocumentsLib.csproj", "{824A3A03-6509-40E9-BD6F-852F0056C480}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MDLPGUIRemains2023", "MDLPGUIRemains2023\MDLPGUIRemains2023.csproj", "{54C7B54F-30A7-4A52-AC4F-2BA1D2AA1A47}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -62,6 +70,22 @@ Global
 		{D281AE00-945E-46A5-B964-A0717D9B6A55}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D281AE00-945E-46A5-B964-A0717D9B6A55}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D281AE00-945E-46A5-B964-A0717D9B6A55}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3575B7F5-53B8-4932-999F-BACF9B97B545}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3575B7F5-53B8-4932-999F-BACF9B97B545}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3575B7F5-53B8-4932-999F-BACF9B97B545}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3575B7F5-53B8-4932-999F-BACF9B97B545}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A00FFAC8-60ED-45BA-BB16-D6A31C5ECC27}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A00FFAC8-60ED-45BA-BB16-D6A31C5ECC27}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A00FFAC8-60ED-45BA-BB16-D6A31C5ECC27}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A00FFAC8-60ED-45BA-BB16-D6A31C5ECC27}.Release|Any CPU.Build.0 = Release|Any CPU
+		{824A3A03-6509-40E9-BD6F-852F0056C480}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{824A3A03-6509-40E9-BD6F-852F0056C480}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{824A3A03-6509-40E9-BD6F-852F0056C480}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{824A3A03-6509-40E9-BD6F-852F0056C480}.Release|Any CPU.Build.0 = Release|Any CPU
+		{54C7B54F-30A7-4A52-AC4F-2BA1D2AA1A47}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{54C7B54F-30A7-4A52-AC4F-2BA1D2AA1A47}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{54C7B54F-30A7-4A52-AC4F-2BA1D2AA1A47}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{54C7B54F-30A7-4A52-AC4F-2BA1D2AA1A47}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

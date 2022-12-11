@@ -24,6 +24,8 @@
   
   <PropertyGroup>
     <RootNamespace>MdlpApiClient.Tests</RootNamespace>
+    <AssemblyVersion>1.0.1.1</AssemblyVersion>
+    <FileVersion>1.2022.0825.2040</FileVersion>
   </PropertyGroup>
   
   <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net462|AnyCPU'">

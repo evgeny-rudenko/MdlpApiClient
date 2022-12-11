@@ -93,7 +93,7 @@ namespace MDLPKIZControl
             FileInfo[] Files = d.GetFiles("*.xml"); //получаем список файлов для списания
             string str = "";
 
-            Console.WriteLine("Начинаем обрабатывать откументы");
+            Console.WriteLine("Начинаем обрабатывать документы");
             logger.Info("Начинаем обрабатывать документы");
             foreach (FileInfo file in Files)
             {
@@ -110,7 +110,8 @@ namespace MDLPKIZControl
                 try 
                 {
                     Console.WriteLine(  $"Отправка документа {file.FullName}");
-                    client.SendDocument(document);  
+                    client.SendDocument(document);
+                    System.Threading.Thread.Sleep(2000);
                 }
                 catch (Exception ex)
                 {

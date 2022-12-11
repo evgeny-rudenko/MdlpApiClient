@@ -61,6 +61,10 @@
 
             // ошибка о неверном сертификате сервера //2022.08.21
             // работало, потом все поломалось
+            // с 20.08.2022 api.mdlp.crpt.ru перешел на сертификат минцифры
+            // Два варианта решения проблемы - поставить игнорирование ошибки проверки  цепочки серитификатов
+            // либо загрузить дополнительные корневые сертификаты на компьютер 
+            // https://telegra.ph/Obnovlenie-kornevogo-sertifikata-MDLP-08-22
             Client.RemoteCertificateValidationCallback = (sender, certificate, chain, sslPolicyErrors) => true; 
         }
 
