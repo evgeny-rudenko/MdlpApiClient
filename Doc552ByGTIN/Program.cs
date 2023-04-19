@@ -36,13 +36,13 @@ namespace Doc552ByGTIN
     {
         static void Main(string[] args)
         {
-            if (args.Length==0)
+            if (args.Length == 0)
             {
                 Console.WriteLine("Нужен файл с GTIN ами для списания");
                 return;
             }
 
-            if (!File.Exists(args[0].ToString()) )
+            if (!File.Exists(args[0].ToString()))
             {
                 Console.WriteLine("Нет такого файла - нужно проверить что там ");
                 return;
@@ -50,30 +50,62 @@ namespace Doc552ByGTIN
 
 
             List<string> withdrawlCodes = File.ReadAllLines(args[0].ToString()).ToList();
+            /*
+            File.ReadAllLines("C:\\Users\\Josh\\Sample.csv")
+                                           .Skip(1)
+                                           .Select(v => DailyValues.FromCsv(v))
+                                           .ToList();
+            */
 
-            string g = Guid.NewGuid().ToString();
+            List<SGTINMD> sGTINMDs = File.ReadAllLines(args[0].ToString())
+                                           //.Skip(1)
+                                           .Select(v => SGTINMD.FromCsv(v))
+                                           .ToList();
 
-            if (!File.Exists("mdlpCodeFromDatabase.txt"))
-            {
-                Console.WriteLine("Нужен файл с кодом места деятельности mdlpCodeFromDatabase.txt");
-                return; 
-            }
+            
             string mdlpCodeFromDatabase = File.ReadAllText("mdlpCodeFromDatabase.txt");
-            
-            
-            // выгрузка документов списания в файлы
-            string filename="";
-            string executablePath = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
-            int chunkCounter = 0;
-            List<List<string>> strings = withdrawlCodes.ChunkBy(10);
-            foreach (List<string> wc in strings)
+
+            List<string> md = new List<string>();
+
+            foreach (SGTINMD s in sGTINMDs)
             {
-                chunkCounter++;
-                filename = Path.Combine(executablePath, "552", "doc_552_" + chunkCounter.ToString() + "_" + g + ".xml");
-                MDLPDocumentsLib.MDLPDoc552 doc522 = new MDLPDocumentsLib.MDLPDoc552(wc, MDLPDocumentsLib.MDLPDoc552.withdrawal_type.СписаниеБезУничт, mdlpCodeFromDatabase);
-                doc522.XmlDoc.Save(filename);
+                md.Add(s.MD);
+
             }
 
+            md = md.Distinct().ToList();
+
+
+
+            // выгрузка документов списания в файлы
+            string filename = "";
+
+            foreach (string mdv in md)
+            {
+                withdrawlCodes = new List<string>();
+
+                foreach (SGTINMD s in sGTINMDs) 
+                {
+                    
+                    if (s.MD == mdv)
+                    {
+                        
+                        withdrawlCodes.Add(s.SGTIN);
+                    }
+                }
+
+                string executablePath = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+                int chunkCounter = 0;
+                string g = Guid.NewGuid().ToString();
+                List<List<string>> strings = withdrawlCodes.ChunkBy(10);
+                foreach (List<string> wc in strings)
+                {
+                    chunkCounter++;
+                    filename = Path.Combine(executablePath, "552", "doc_552_" + chunkCounter.ToString() + "_" + g + ".xml");
+                    MDLPDocumentsLib.MDLPDoc552 doc522 = new MDLPDocumentsLib.MDLPDoc552(wc, MDLPDocumentsLib.MDLPDoc552.withdrawal_type.СписаниеБезУничт, mdv);
+                    doc522.XmlDoc.Save(filename);
+                }
+            }
         }
     }
 }

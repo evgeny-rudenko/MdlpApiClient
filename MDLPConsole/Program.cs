@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MdlpApiClient;
+using System.Threading;
 using System.Windows.Forms; /// для того чтобы показывать стандартные окна оповещений Windows
 
 
@@ -77,7 +78,9 @@ namespace MDLPConsole
             
             var doc_list = client.GetOutcomeDocuments(docFilter, 1, 100);
             invoicescounter += doc_list.Documents.Count();
-            
+
+            System.Threading.Thread.Sleep(1000); // честный знак поменял паузы между обращениями
+
             logger.Info($"Документов прихода типа 416 {doc_list.Documents.Count().ToString()} или больше ");
             docFilter.DocType = 702;
             doc_list = client.GetOutcomeDocuments(docFilter, 1, 100);

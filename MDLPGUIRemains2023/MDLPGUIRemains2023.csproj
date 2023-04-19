@@ -58,6 +58,7 @@
     <Compile Include="ListExtension.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utils\AptekaCode.cs" />
     <Compile Include="Utils\InitApp.cs" />
     <Compile Include="Utils\KizStorage.cs" />
     <Compile Include="Utils\MDLPFileRemains.cs" />
@@ -93,6 +94,12 @@
   <ItemGroup>
     <Folder Include="DocumentsOut\" />
     <Folder Include="Remains\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MDLPDocumentsLib\MDLPDocumentsLib.csproj">
+      <Project>{824a3a03-6509-40e9-bd6f-852f0056c480}</Project>
+      <Name>MDLPDocumentsLib</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

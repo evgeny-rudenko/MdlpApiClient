@@ -80,7 +80,7 @@ namespace MDLPKIZControl
 
             string pathName = "";
             string executablePath = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
-            string docPath = Path.Combine(executablePath, "522");
+            string docPath = Path.Combine(executablePath, Properties.Settings.Default.DocFolder);
             List<string> processedDocuments = new List<string>(); 
             if (File.Exists("processed.txt"))
             {
@@ -111,7 +111,7 @@ namespace MDLPKIZControl
                 {
                     Console.WriteLine(  $"Отправка документа {file.FullName}");
                     client.SendDocument(document);
-                    System.Threading.Thread.Sleep(2000);
+                    System.Threading.Thread.Sleep(2000); /// таймауты несколько раз поменялись и субъективно с таймаутами из документации отсылка ломается
                 }
                 catch (Exception ex)
                 {

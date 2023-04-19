@@ -13,123 +13,41 @@ namespace MDLPGUIRemains2023.Utils
     class Kiz
     {
 
-        public string sgtin;       // SGTIN товара
-        public string status;       // в обороте или нет 
-        public string withdrawal_type;	//2
-        public string batch;       // номер серии
-        public DateTime expiration_date; // последняя дата операции с КИЗом 
-        public string pack3_id;     //	null АХЕЗ
-        public string gtin;        //GTIN товара
-        public string sell_name;   // часть наименования товара 
-        public string sys_id;      // предположительно - номер точки где числится КИЗ
-        public string prod_name;   // АМОКСИЦИЛЛИН
-        public string full_prod_name; // полное наименование с дозировкой 
-        public string source_type; // АХЕЗ
-        public string federal_subject_name; //Регион таблетки
-        public DateTime last_tracing_op_date; // последняя дата операции с КИЗом 
-        public string gnvlp;       // признак ЖВ  true/false
-        public string verified;     // АХЕЗ
-        public string total_cost;   // затраты, но там нифига нет
-        
-        
-        public string apteka_mdlp; //
+        public string sgtin { get; set; }        // SGTIN товара
+        public string status { get; set; }        // в обороте или нет 
+        public string withdrawal_type { get; set; } 	//2
+        public string batch { get; set; }        // номер серии
+        public DateTime expiration_date { get; set; }  // СГ
+        public string pack3_id { get; set; }      //	null АХЕЗ
+        public string gtin { get; set; }         //GTIN товара
+        public string sell_name { get; set; }    // часть наименования товара 
+        public string sys_id { get; set; }       // предположительно - номер точки где числится КИЗ
+        public string prod_name { get; set; }    // АМОКСИЦИЛЛИН
+        public string full_prod_name { get; set; }  // полное наименование с дозировкой 
+        public string source_type { get; set; }  // АХЕЗ
+        public string federal_subject_name { get; set; }  //Регион таблетки
+        //public DateTime last_tracing_op_date; // последняя дата операции с КИЗом 
+        public string gnvlp { get; set; }        // признак ЖВ  true/false
+        public string verified { get; set; }      // АХЕЗ
+        public string total_cost { get; set; }    // затраты, но там нифига нет
+
+
+        public string apteka_mdlp { get; set; }  //
 
         //Часть для заполнения данными по ефарме         
-        public string cheque;
-        public string internal_barcode;
-        public string apteka;
-        public string date_cheque;
-        
-        public void SetFieldValue (string FieldName , string FieldValue)
-        {
-            
-            // Тут нужно сделать через Reflection , но не понял как
-            switch (FieldName)
-            {
-                case "sgtin":
-                    sgtin = FieldValue;
-                    break;
-                case "status":
-                    status = FieldValue;
-                    break;
+        public string cheque { get; set; }
+        public string internal_barcode { get; set; }
+        public string apteka { get; set; }
+        public string date_cheque { get; set; }
 
-                case "withdrawal_type":
-                    withdrawal_type = FieldValue;
-                    break;
-                case "batch":
-                    batch = FieldValue;
-                    break;
-                case "expiration_date":
-                    //expiration_date = DateTime.Parse(FieldValue);
-                    break;
+        //public void SetFieldValue (string FieldName , string FieldValue)
+        //{
 
-                case "pack3_id":
-                    pack3_id = FieldValue;
-                    break;
+        // Тут нужно сделать через Reflection , но не понял как
 
-                case "gtin":
-                    gtin = FieldValue;
-                    break;
-                case "sell_name":
-                    sell_name = FieldValue;
-                    break;
-                case "sys_id":
-                    sys_id = FieldValue;
-                    break;
-                case "prod_name":
-                    prod_name = FieldValue;
-                    break;
-                case "full_prod_name":
-                    full_prod_name = FieldValue;
-                    break;
 
-                case "source_type":
-                    source_type = FieldValue;
-                    break;
 
-                case "federal_subject_name":
-                    federal_subject_name = FieldValue;
-                    break;
-                case "last_tracing_op_date":
-                    //last_tracing_op_date = DateTime.Parse(FieldValue);
-                    break;
-
-                case "gnvlp":
-                    gnvlp = FieldValue;
-                    break;
-
-                case "verified":
-                    verified = FieldValue;
-                    break;
-
-                case "total_cost":
-                    total_cost = FieldValue;
-                    break;
-                case "apteka_mdlp":
-                    apteka_mdlp = FieldValue;
-                    break;
-
-                //Часть для заполнения данными по ефарме         
-                case "cheque":
-                    cheque = FieldValue;
-                    break;
-                case "internal_barcode":
-                    internal_barcode = FieldValue;
-                    break;
-                case "apteka":
-                    apteka = FieldValue;
-                    break;
-
-                case "date_cheque":
-                    date_cheque = FieldValue;
-                    break;
-
-            
-
-            }
-        
-
-        }
+        //}
 
         #region Данные в выгрузке одна строка
         // пример 
@@ -156,7 +74,7 @@ namespace MDLPGUIRemains2023.Utils
 
 
         */
-        #endregion 
+        #endregion
     }
     internal class KizStorage
     {
@@ -170,8 +88,7 @@ namespace MDLPGUIRemains2023.Utils
             return strwithquotes;
 
         }
-        
-        
+                
         
         public void ReadMDLCSV(string filename = "remains_small.csv")
         {
@@ -190,11 +107,12 @@ namespace MDLPGUIRemains2023.Utils
                 fieledcouner++;
             }
 
-            
-            string[] kizstr = File.ReadAllLines(filename,Encoding.GetEncoding(866)); // в других отчетах может быть UTF
+            AptekaCode ac = new AptekaCode();
+            string[] kizstr = File.ReadAllLines(filename,Encoding.UTF8); // в других отчетах может быть UTF
             kizstr = kizstr.Skip(1).ToArray();
 
             string FieldName;
+            string FieldValue;
             foreach (string kizline in kizstr)
             {
                 
@@ -207,10 +125,103 @@ namespace MDLPGUIRemains2023.Utils
                 for (int i=0; i < splitkiz.Length; i++)
                 {
                     FieldName = "";
+                    FieldValue = "";
                     if (fields.ContainsKey(i))
                     {
                         FieldName = fields[i];
-                        onekiz.SetFieldValue(FieldName,deleteQuotes( splitkiz[i]));
+                        //onekiz.SetFieldValue(FieldName,deleteQuotes( splitkiz[i]));
+                        FieldValue = deleteQuotes(splitkiz[i]);
+                        switch (FieldName)
+                        {
+                            case "sgtin":
+                                onekiz.sgtin = FieldValue;
+                                break;
+                            case "status":
+                                onekiz.status = FieldValue;
+                                break;
+
+                            case "withdrawal_type":
+                                onekiz.withdrawal_type = FieldValue;
+                                break;
+                            case "batch":
+                                onekiz.batch = FieldValue;
+                                break;
+                            case "expiration_date":
+                                try
+                                {
+                                    onekiz.expiration_date = DateTime.ParseExact(FieldValue, "yyyy-MM-dd", null);
+                                    break;
+                                }
+                                catch (Exception e)
+                                {
+                                    break;
+                                }
+                                break;
+
+                            case "pack3_id":
+                                onekiz.pack3_id = FieldValue;
+                                break;
+
+                            case "gtin":
+                                onekiz.gtin = FieldValue;
+                                break;
+                            case "sell_name":
+                                onekiz.sell_name = FieldValue;
+                                break;
+                            case "sys_id":
+                                onekiz.sys_id = FieldValue;
+                                break;
+                            case "prod_name":
+                                onekiz.prod_name = FieldValue;
+                                break;
+                            case "full_prod_name":
+                                onekiz.full_prod_name = FieldValue;
+                                break;
+
+                            case "source_type":
+                                onekiz.source_type = FieldValue;
+                                break;
+
+                            case "federal_subject_name":
+                                onekiz.federal_subject_name = FieldValue;
+                                break;
+                            case "last_tracing_op_date":
+                                //onekiz.last_tracing_op_date = DateTime.Parse(FieldValue);
+                                break;
+
+                            case "gnvlp":
+                                onekiz.gnvlp = FieldValue;
+                                break;
+
+                            case "verified":
+                                onekiz.verified = FieldValue;
+                                break;
+
+                            case "total_cost":
+                                onekiz.total_cost = FieldValue;
+                                break;
+                            case "apteka_mdlp":
+                                onekiz.apteka_mdlp = FieldValue;
+                                break;
+
+                            //Часть для заполнения данными по ефарме         
+                            case "cheque":
+                                onekiz.cheque = FieldValue;
+                                break;
+                            case "internal_barcode":
+                                onekiz.internal_barcode = FieldValue;
+                                break;
+                            case "apteka":
+                                onekiz.apteka = FieldValue;
+                                break;
+
+                            case "date_cheque":
+                                onekiz.date_cheque = FieldValue;
+                                break;
+
+
+
+                        }
                     }
                     
                 }
