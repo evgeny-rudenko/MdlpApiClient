@@ -10,6 +10,7 @@ using System.Windows.Forms;
 
 namespace MDLPGUIRemains2023.Utils
 {
+    
     class Kiz
     {
 
@@ -81,6 +82,8 @@ namespace MDLPGUIRemains2023.Utils
 
         private List<string> csvfields = new List<string>();
         public List<Kiz> KizList = new List<Kiz>();
+        public List<string> ChequeKizList = new List<string>();
+        
         private string deleteQuotes(string strwithquotes)
         {
             strwithquotes = strwithquotes.Replace(@"""", "");
@@ -88,8 +91,22 @@ namespace MDLPGUIRemains2023.Utils
             return strwithquotes;
 
         }
-                
-        
+
+
+        /// <summary>
+        /// Загрузка списков киз, которые прошли по чекам из файла
+        /// </summary>
+        /// <param name="filename"></param>
+        public void ReadChequeKizFromFile(string filename = "cheque.csv")
+        {
+            ChequeKizList.Clear();
+
+            if (!File.Exists(filename))
+                return;
+
+            // по хорошему нужно грузить пачками - может быть миллион строк в одной аптеке
+            ChequeKizList = File.ReadAllLines(filename).ToList();
+        }
         public void ReadMDLCSV(string filename = "remains_small.csv")
         {
             //  string filename = "remains_small.csv"; //"4496c65b-6001-4f7d-ad80-fd4974082bee.zip";

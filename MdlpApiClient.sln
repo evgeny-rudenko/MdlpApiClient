@@ -32,6 +32,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MDLPDocumentsLib", "MDLPDoc
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MDLPGUIRemains2023", "MDLPGUIRemains2023\MDLPGUIRemains2023.csproj", "{54C7B54F-30A7-4A52-AC4F-2BA1D2AA1A47}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MDLPChequeKIZCompare", "MDLPChequeKIZCompare\MDLPChequeKIZCompare.csproj", "{818AF4C5-171D-4267-8899-6EB40BAE230A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MDLPChequeKIZExport", "MDLPChequeKIZExport\MDLPChequeKIZExport.csproj", "{05BB201B-6650-47E4-A229-0E59004B615E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MDLPChequeKIZImport", "MDLPChequeKIZImport\MDLPChequeKIZImport.csproj", "{46455958-35A5-4303-AF86-7341AB881B1B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -86,6 +92,18 @@ Global
 		{54C7B54F-30A7-4A52-AC4F-2BA1D2AA1A47}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{54C7B54F-30A7-4A52-AC4F-2BA1D2AA1A47}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{54C7B54F-30A7-4A52-AC4F-2BA1D2AA1A47}.Release|Any CPU.Build.0 = Release|Any CPU
+		{818AF4C5-171D-4267-8899-6EB40BAE230A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{818AF4C5-171D-4267-8899-6EB40BAE230A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{818AF4C5-171D-4267-8899-6EB40BAE230A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{818AF4C5-171D-4267-8899-6EB40BAE230A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{05BB201B-6650-47E4-A229-0E59004B615E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{05BB201B-6650-47E4-A229-0E59004B615E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{05BB201B-6650-47E4-A229-0E59004B615E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{05BB201B-6650-47E4-A229-0E59004B615E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{46455958-35A5-4303-AF86-7341AB881B1B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{46455958-35A5-4303-AF86-7341AB881B1B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{46455958-35A5-4303-AF86-7341AB881B1B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{46455958-35A5-4303-AF86-7341AB881B1B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

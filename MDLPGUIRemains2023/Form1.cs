@@ -23,6 +23,8 @@ namespace MDLPGUIRemains2023
             public string sys_id { get; set; }
         }
 
+        
+
         public Form1()
         {
             InitializeComponent();
@@ -32,7 +34,13 @@ namespace MDLPGUIRemains2023
         {
             
             MDLPGUIRemains2023.Utils.KizStorage kizStorage = new Utils.KizStorage();
-            
+
+            // подгружаем список кизов которые прошли по чекам
+            if (cbCheque.Checked)
+            {
+                kizStorage.ReadChequeKizFromFile();
+            }
+
             if (Properties.Settings.Default.Debug)
             {
                 
@@ -46,13 +54,29 @@ namespace MDLPGUIRemains2023
                 kizStorage.ReadMDLCSV(Properties.Settings.Default.DebugMdlpFile);
             }
             
+
             
             List<Utils.Kiz> kizs = new List<Utils.Kiz>();
             kizs = kizStorage.KizList.ToList(); // грузим в 
             kizs.RemoveAll(x => x.sell_name == null);
-
-
+            
             // последовательно применяем фильтры 
+            // фильтр по чекам
+            /*
+             var employees = employees1.IntersectBy(
+               employees2.Select(e => e.SSN),
+               e => e.SSN
+                var MS = StudentCollection1.Select(x => x.Name)
+                        . Intersect(StudentCollection2.Select(y => y.Name)).ToList();
+             */
+            if (cbCheque.Checked)
+            {
+                kizs = kizs.Where(x => kizStorage.ChequeKizList.Contains(x.sgtin.ToString())).ToList();
+                
+
+
+            }
+            
             // фильтр по наименованию товара
             if (tbGoodFilter.Text.Length > 1)
             {
@@ -98,6 +122,11 @@ namespace MDLPGUIRemains2023
             { MessageBox.Show("Пустая таблица"); }
         }
 
+        /// <summary>
+        /// Проверяем список КИЗ, которые уже могут быть списаны по чекам 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void button2_Click(object sender, EventArgs e)
         {
 
